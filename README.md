@@ -41,10 +41,10 @@ Add the flake input and overlay to your flake configuration:
 }
 ```
 
-Then you can add `ntfy-push` to your packages:
+Then you can add `ntfy-sh-client` to your packages:
 
 ```nix
-environment.systemPackages = [ pkgs.ntfy-push ];
+environment.systemPackages = [ pkgs.ntfy-sh-client ];
 ```
 
 ### Using direnv (development)

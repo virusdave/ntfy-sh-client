@@ -9,8 +9,8 @@
   outputs = { self, nixpkgs, flake-utils }:
     {
       overlays.default = final: prev: {
-        ntfy-push = final.stdenv.mkDerivation {
-          name = "ntfy-push";
+        ntfy-sh-client = final.stdenv.mkDerivation {
+          name = "ntfy-sh-client";
           version = "0.1.0";
 
           src = ./.;
