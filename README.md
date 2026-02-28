@@ -2,6 +2,17 @@
 
 A simple Nix flake that wraps [ntfy.sh](https://ntfy.sh/) for sending push notifications from the command line.
 
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Options](#options)
+- [Environment Variables](#environment-variables)
+- [Priority Levels](#priority-levels)
+- [Examples](#examples)
+- [Development](#development)
+- [License](#license)
+
 ## Installation
 
 ### Using nix flake run (temporary)
