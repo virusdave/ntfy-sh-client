@@ -16,7 +16,38 @@ nix run github:virusdave/ntfy-sh-client -- --help
 nix profile install github:virusdave/ntfy-sh-client
 ```
 
-### Using direnv
+### Using the overlay in a NixOS system configuration
+
+Add the flake input and overlay to your flake configuration:
+
+```nix
+{
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    ntfy-sh-client.url = "github:virusdave/ntfy-sh-client";
+  };
+
+  outputs = { self, nixpkgs, ntfy-sh-client }: {
+    nixosConfigurations.myhost = nixpkgs.lib.nixosSystem {
+      system = "aarch64-darwin";
+      modules = [
+        {
+          nixpkgs.overlays = [ ntfy-sh-client.overlays.default ];
+        }
+        # ... rest of your configuration
+      ];
+    };
+  };
+}
+```
+
+Then you can add `ntfy-push` to your packages:
+
+```nix
+environment.systemPackages = [ pkgs.ntfy-push ];
+```
+
+### Using direnv (development)
 
 Add to your `.envrc`:
 
@@ -33,7 +64,7 @@ Set the `NTFY_SH_TOPIC` environment variable to specify the notification topic, 
 ### Basic message (as argument)
 
 ```bash
-NTFY_SH_TOPIC=alerts ntfy-push "System down!"
+NTFY_SH_TOPIC=alerts ntfy-push 'System down!'
 ```
 
 ### Message from stdin
