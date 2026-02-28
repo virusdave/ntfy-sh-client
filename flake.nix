@@ -2,7 +2,7 @@
   description = "ntfy.sh push notification CLI wrapper";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -25,7 +25,7 @@
             mkdir -p $out/bin
             cp ntfy-push.sh $out/bin/ntfy-push
             chmod +x $out/bin/ntfy-push
-            
+
             wrapProgram $out/bin/ntfy-push \
               --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.curl ]}
           '';
