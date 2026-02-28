@@ -7,13 +7,13 @@ A simple Nix flake that wraps [ntfy.sh](https://ntfy.sh/) for sending push notif
 ### Using nix flake run (temporary)
 
 ```bash
-nix run github:virusdave/pager -- --help
+nix run github:virusdave/ntfy-sh-client -- --help
 ```
 
 ### Using nix profile (permanent)
 
 ```bash
-nix profile install github:virusdave/pager
+nix profile install github:virusdave/ntfy-sh-client
 ```
 
 ### Using direnv
