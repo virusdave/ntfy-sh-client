@@ -36,12 +36,12 @@ OPTIONS:
   -h, --help             Show this help message
 
 EXAMPLES:
-  NTFY_SH_TOPIC=alerts ntfy-push "System down!"
-  
+  NTFY_SH_TOPIC=alerts ntfy-push 'System down!'
+
   NTFY_SH_TOPIC=backup ntfy-push -t "Backup Complete" -p high "Full backup finished"
-  
+
   echo "Database migration successful" | NTFY_SH_TOPIC=db ntfy-push -t "Migration"
-  
+
   NTFY_SH_TOPIC=alerts ntfy-push -b ⚠️ -p high "Warning message"
 EOF
   exit "${1:-0}"
@@ -117,7 +117,7 @@ if [[ -n "$priority" ]]; then
     default|3) priority="3" ;;
     high|4) priority="4" ;;
     max|urgent|5) priority="5" ;;
-    *) 
+    *)
       if ! [[ "$priority" =~ ^[1-5]$ ]]; then
         echo "Error: Invalid priority '$priority'. Use: min, low, default, high, max (or 1-5)" >&2
         exit 1
