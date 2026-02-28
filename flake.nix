@@ -11,7 +11,7 @@
       overlays.default = final: prev: {
         ntfy-sh-client = final.stdenv.mkDerivation {
           name = "ntfy-sh-client";
-          version = "0.1.0";
+          version = "1.0.0";
 
           src = ./.;
 
@@ -22,7 +22,7 @@
             mkdir -p $out/bin
             cp ntfy-push.sh $out/bin/ntfy-push
             chmod +x $out/bin/ntfy-push
-            
+
             wrapProgram $out/bin/ntfy-push \
               --prefix PATH : ${final.lib.makeBinPath [ final.curl ]}
           '';
@@ -46,7 +46,7 @@
             mkdir -p $out/bin
             cp ntfy-push.sh $out/bin/ntfy-push
             chmod +x $out/bin/ntfy-push
-            
+
             wrapProgram $out/bin/ntfy-push \
               --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.curl ]}
           '';
