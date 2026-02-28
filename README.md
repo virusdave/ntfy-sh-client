@@ -198,4 +198,6 @@ nix build
 
 ## License
 
-This flake is provided as-is. The ntfy.sh service is provided by [Philipp C. Heckel](https://github.com/binwiederhier/ntfy).
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+The ntfy.sh service is provided by [Philipp C. Heckel](https://github.com/binwiederhier/ntfy).
