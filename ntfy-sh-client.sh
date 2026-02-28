@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-# ntfy.sh push notification CLI wrapper
-# Usage: ntfy-push [OPTIONS] [MESSAGE_TEXT...]
+# ntfy.sh CLI client
+# Usage: ntfy-sh-client [OPTIONS] [MESSAGE_TEXT...]
 #   MESSAGE_TEXT can be passed as arguments or via stdin
 
 NTFY_URL="${NTFY_URL:-https://ntfy.sh}"
@@ -20,9 +20,9 @@ declare -a attachments=()
 # Display usage
 usage() {
   cat << 'EOF'
-Usage: ntfy-push [OPTIONS] [MESSAGE...]
+Usage: ntfy-sh-client [OPTIONS] [MESSAGE...]
 
-Push a notification to ntfy.sh. If MESSAGE is not provided, reads from stdin.
+Send a notification to ntfy.sh. If MESSAGE is not provided, reads from stdin.
 
 ENVIRONMENT VARIABLES:
   NTFY_SH_TOPIC    Required. The topic to publish to.
@@ -36,13 +36,13 @@ OPTIONS:
   -h, --help             Show this help message
 
 EXAMPLES:
-  NTFY_SH_TOPIC=alerts ntfy-push 'System down!'
+  NTFY_SH_TOPIC=alerts ntfy-sh-client 'System down!'
 
-  NTFY_SH_TOPIC=backup ntfy-push -t "Backup Complete" -p high "Full backup finished"
+  NTFY_SH_TOPIC=backup ntfy-sh-client -t "Backup Complete" -p high "Full backup finished"
 
-  echo "Database migration successful" | NTFY_SH_TOPIC=db ntfy-push -t "Migration"
+  echo "Database migration successful" | NTFY_SH_TOPIC=db ntfy-sh-client -t "Migration"
 
-  NTFY_SH_TOPIC=alerts ntfy-push -b ⚠️ -p high "Warning message"
+  NTFY_SH_TOPIC=alerts ntfy-sh-client -b ⚠️ -p high "Warning message"
 EOF
   exit "${1:-0}"
 }

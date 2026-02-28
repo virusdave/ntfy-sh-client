@@ -1,5 +1,5 @@
 {
-  description = "ntfy.sh push notification CLI wrapper";
+  description = "ntfy.sh CLI client";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
@@ -20,10 +20,10 @@
 
           installPhase = ''
             mkdir -p $out/bin
-            cp ntfy-push.sh $out/bin/ntfy-push
-            chmod +x $out/bin/ntfy-push
+            cp ntfy-sh-client.sh $out/bin/ntfy-sh-client
+            chmod +x $out/bin/ntfy-sh-client
 
-            wrapProgram $out/bin/ntfy-push \
+            wrapProgram $out/bin/ntfy-sh-client \
               --prefix PATH : ${final.lib.makeBinPath [ final.curl ]}
           '';
         };

@@ -1,6 +1,6 @@
-# ntfy-push
+# ntfy-sh-client
 
-A simple Nix flake that wraps [ntfy.sh](https://ntfy.sh/) for sending push notifications from the command line.
+A simple Nix flake for sending notifications to [ntfy.sh](https://ntfy.sh/) from the command line.
 
 ## Table of Contents
 
@@ -70,48 +70,48 @@ Then run `direnv allow`.
 
 ## Usage
 
-Set the `NTFY_SH_TOPIC` environment variable to specify the notification topic, then run `ntfy-push` with your message:
+Set the `NTFY_SH_TOPIC` environment variable to specify the notification topic, then run `ntfy-sh-client` with your message:
 
 ### Basic message (as argument)
 
 ```bash
-NTFY_SH_TOPIC=alerts ntfy-push 'System down!'
+NTFY_SH_TOPIC=alerts ntfy-sh-client 'System down!'
 ```
 
 ### Message from stdin
 
 ```bash
-echo "Backup complete" | NTFY_SH_TOPIC=backup ntfy-push
+echo "Backup complete" | NTFY_SH_TOPIC=backup ntfy-sh-client
 ```
 
 ### With title and priority
 
 ```bash
-NTFY_SH_TOPIC=backup ntfy-push -t "Backup Complete" -p high "Full backup finished"
+NTFY_SH_TOPIC=backup ntfy-sh-client -t "Backup Complete" -p high "Full backup finished"
 ```
 
 ### With badge/emoji
 
 ```bash
-NTFY_SH_TOPIC=alerts ntfy-push -b ⚠️ -p high "Warning message"
+NTFY_SH_TOPIC=alerts ntfy-sh-client -b ⚠️ -p high "Warning message"
 ```
 
 ### With attachment URL
 
 ```bash
-NTFY_SH_TOPIC=screenshots ntfy-push -a "https://example.com/image.jpg" "Screenshot attached"
+NTFY_SH_TOPIC=screenshots ntfy-sh-client -a "https://example.com/image.jpg" "Screenshot attached"
 ```
 
 ### Multiple attachments
 
 ```bash
-NTFY_SH_TOPIC=files ntfy-push -a "https://example.com/file1.jpg" -a "https://example.com/file2.jpg" "Multiple files"
+NTFY_SH_TOPIC=files ntfy-sh-client -a "https://example.com/file1.jpg" -a "https://example.com/file2.jpg" "Multiple files"
 ```
 
 ## Options
 
 ```
-Usage: ntfy-push [OPTIONS] [MESSAGE...]
+Usage: ntfy-sh-client [OPTIONS] [MESSAGE...]
 
 ENVIRONMENT VARIABLES:
   NTFY_SH_TOPIC    Required. The topic to publish to.
@@ -148,9 +148,9 @@ Priorities can be specified by name or number:
 #!/bin/bash
 BACKUP_LOG=$(mktemp)
 if /path/to/backup.sh > "$BACKUP_LOG" 2>&1; then
-  NTFY_SH_TOPIC=backups ntfy-push -t "Backup Success" -p high "Daily backup completed"
+  NTFY_SH_TOPIC=backups ntfy-sh-client -t "Backup Success" -p high "Daily backup completed"
 else
-  NTFY_SH_TOPIC=backups ntfy-push -t "Backup Failed" -p max -b ❌ "$(cat $BACKUP_LOG)"
+  NTFY_SH_TOPIC=backups ntfy-sh-client -t "Backup Failed" -p max -b ❌ "$(cat $BACKUP_LOG)"
 fi
 rm -f "$BACKUP_LOG"
 ```
@@ -160,8 +160,8 @@ rm -f "$BACKUP_LOG"
 ```bash
 #!/bin/bash
 long_running_task && \
-  NTFY_SH_TOPIC=tasks ntfy-push -t "Task Complete" "Your long task is done!" || \
-  NTFY_SH_TOPIC=tasks ntfy-push -t "Task Failed" -p high -b ❌ "Your task failed"
+  NTFY_SH_TOPIC=tasks ntfy-sh-client -t "Task Complete" "Your long task is done!" || \
+  NTFY_SH_TOPIC=tasks ntfy-sh-client -t "Task Failed" -p high -b ❌ "Your task failed"
 ```
 
 ### Pipeline error notification
@@ -170,9 +170,9 @@ long_running_task && \
 #!/bin/bash
 TOPIC=my-alerts
 if ./build.sh 2>&1 | tee build.log; then
-  NTFY_SH_TOPIC=$TOPIC ntfy-push -t "Build Success" -p high "Build completed successfully"
+  NTFY_SH_TOPIC=$TOPIC ntfy-sh-client -t "Build Success" -p high "Build completed successfully"
 else
-  NTFY_SH_TOPIC=$TOPIC ntfy-push -t "Build Failed" -p max -b 🔨 "Build failed, check logs"
+  NTFY_SH_TOPIC=$TOPIC ntfy-sh-client -t "Build Failed" -p max -b 🔨 "Build failed, check logs"
 fi
 ```
 
@@ -187,7 +187,7 @@ nix flake enter
 ### Test the script locally
 
 ```bash
-./ntfy-push.sh --help
+./ntfy-sh-client.sh --help
 ```
 
 ### Build the package
