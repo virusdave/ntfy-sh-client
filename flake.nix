@@ -34,7 +34,7 @@
       in
       {
         packages.default = pkgs.stdenv.mkDerivation {
-          name = "ntfy-push";
+          name = "ntfy-sh-client";
           version = "0.1.0";
 
           src = ./.;
@@ -44,17 +44,17 @@
 
           installPhase = ''
             mkdir -p $out/bin
-            cp ntfy-push.sh $out/bin/ntfy-push
-            chmod +x $out/bin/ntfy-push
+            cp ntfy-sh-client.sh $out/bin/ntfy-sh-client
+            chmod +x $out/bin/ntfy-sh-client
 
-            wrapProgram $out/bin/ntfy-push \
+            wrapProgram $out/bin/ntfy-sh-client \
               --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.curl ]}
           '';
         };
 
         apps.default = {
           type = "app";
-          program = "${self.packages.${system}.default}/bin/ntfy-push";
+          program = "${self.packages.${system}.default}/bin/ntfy-sh-client";
         };
 
         devShells.default = pkgs.mkShell {
